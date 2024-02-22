@@ -54,7 +54,7 @@ function App() {
       "Content-Type": "application/x-www-form-urlencoded",
     };
 
-    const bodyContent = `access_token=$str`;
+    const bodyContent = `access_token=${str}`;
     if (str === null) {
       const res = await fetch(`https://3.7.66.195/api/get-access-token`);
       const d = await res.json();
