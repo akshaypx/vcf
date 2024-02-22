@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Equip";
+  src: url("./assets/fonts/EquipExtended-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+html {
+  font-family: "Equip", sans-serif;
+}
