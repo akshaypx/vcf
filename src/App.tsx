@@ -18,14 +18,12 @@ import DefImage from "./assets/images/default.jpg";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [isError, setIsError] = useState<boolean>(false);
+  // const [isError, setIsError] = useState<boolean>(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [showVoice, setShowVoice] = useState(false);
   const dispatch = useAppDispatch();
   const responseData = useAppSelector((state) => state.message.responseData);
-  const [speechText, setSpeechText] = useState(
-    "Good Morning, How can I help you?"
-  );
+  const speechText = "Good Morning, How can I help you?";
   const [isListening, setIsListening] = useState<boolean>(false);
   // const [showToast, setShowToast] = useState("");
   //speech
@@ -35,14 +33,14 @@ function App() {
   const [token, setToken] = useState<string | null>(null);
 
   function getWordCount(str: string) {
-    var count = 0;
+    let count = 0;
     for (let i = 0; i < str.length; i++) {
       if (str.charAt(i) === " " || i + 1 === str.length) count++;
     }
     return count;
   }
   function getFrequency(str: string, char: string) {
-    var freq = 0;
+    let freq = 0;
     for (let i = 0; i < str.length; i++) {
       if (str.charAt(i) === char) freq++;
     }
@@ -50,13 +48,13 @@ function App() {
   }
 
   const validateOrGetToken = async (str: string | null) => {
-    let headersList = {
+    const headersList = {
       Accept: "*/*",
       "User-Agent": "Thunder Client (https://www.thunderclient.com)",
       "Content-Type": "application/x-www-form-urlencoded",
     };
 
-    let bodyContent = `access_token=$str`;
+    const bodyContent = `access_token=$str`;
     if (str === null) {
       const res = await fetch(`http://localhost:8000/api/get-access-token`);
       const d = await res.json();
@@ -118,7 +116,7 @@ function App() {
       } else {
         setIsSpeaking(false);
         setIsListening(false);
-        setIsError(true);
+        // setIsError(true);
         setShowVoice(false);
         throw new Error();
       }
@@ -354,7 +352,10 @@ function App() {
                                 v.selected_varient?.toLowerCase()
                               ) {
                                 return (
-                                  <div className="bg-[#46d7ac] px-4 py-1 rounded-full">
+                                  <div
+                                    key={_}
+                                    className="bg-[#46d7ac] px-4 py-1 rounded-full"
+                                  >
                                     {a}
                                   </div>
                                 );

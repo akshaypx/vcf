@@ -25,7 +25,7 @@ const UploadForm = () => {
 
   const fetchData = async (file: any) => {
     const url = "http://localhost:8000/send-voice-file";
-    let bodyContent = new FormData();
+    const bodyContent = new FormData();
     bodyContent.append("uploaded_file", file); // Use 'uploaded_file' as the key
     setIsLoading(true);
     const response = await fetch(url, {
