@@ -6,7 +6,7 @@ import {
 } from "../../interfaces/messageInterface";
 
 // const API_URL = "https://13.234.76.77";
-const API_URL = "http://localhost:8000";
+const API_URL = "https://3.7.66.195";
 
 export const fetchMessage = createAsyncThunk(
   "message/fetchMessage",

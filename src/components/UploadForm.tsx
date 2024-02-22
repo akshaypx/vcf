@@ -24,7 +24,7 @@ const UploadForm = () => {
   // }
 
   const fetchData = async (file: any) => {
-    const url = "http://localhost:8000/send-voice-file";
+    const url = "https://3.7.66.195/send-voice-file";
     const bodyContent = new FormData();
     bodyContent.append("uploaded_file", file); // Use 'uploaded_file' as the key
     setIsLoading(true);
