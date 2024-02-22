@@ -14,7 +14,6 @@ import { addToMessages, fetchMessage } from "./store/slice/messageSlice";
 import tickImage from "./assets/images/tick.png";
 import annyang from "annyang";
 import { ToastContainer, toast } from "react-toastify";
-import DefImage from "./assets/images/default.jpg";
 import "react-toastify/dist/ReactToastify.css";
 
 function App() {
