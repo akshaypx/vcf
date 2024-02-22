@@ -32,6 +32,7 @@ export interface ResponseProductsEntity {
   summary: string;
   price: number;
   varient?: VarientEntity[] | null;
+  image_link: string;
 }
 export interface ProductsEntity {
   product_code: string;
@@ -39,6 +40,7 @@ export interface ProductsEntity {
   summary: string;
   price: string;
   varient?: VarientEntity[] | null;
+  image_link: string;
 }
 export interface Message {
   text: string;

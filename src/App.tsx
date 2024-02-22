@@ -127,7 +127,7 @@ function App() {
     }
   };
 
-  console.log("isSpeaking = ", isSpeaking, "isListening = ", isListening);
+  // console.log("isSpeaking = ", isSpeaking, "isListening = ", isListening);
 
   const sentenceCorrection = async (str: string) => {
     try {
@@ -161,7 +161,7 @@ function App() {
             //is
             setShowVoice(true);
           } else {
-            console.log(firstPhrase);
+            // console.log(firstPhrase);
             toast("Say 'Hello VK' to begin!");
           }
         }
@@ -327,8 +327,8 @@ function App() {
             responseData.cart_id === null &&
             responseData.selectedProduct && (
               <div className="bg-white h-[350px] w-[600px] flex rounded-md justify-center items-start p-2 gap-4">
-                <div className="bg-gray-200 w-1/4 h-full rounded-md object-contain">
-                  <img src={DefImage} alt="" />
+                <div className="bg-gray-200 w-1/4 h-full rounded-md object-contain flex justify-center items-center">
+                  <img src={responseData.selectedProduct.image_link} alt="" />
                 </div>
                 <div className="flex-1 flex flex-col gap-1">
                   <p className="font-bold">
@@ -384,10 +384,10 @@ function App() {
             responseData.products?.map((p, _) => (
               <div
                 key={_}
-                className="bg-white h-[300px] w-[200px] p-4 flex flex-col justify-between rounded-md"
+                className="bg-white h-[300px] w-[200px] p-4 flex flex-col justify-between rounded-md overflow-hidden"
               >
-                <div className="bg-gray-200 w-full h-40 rounded-md">
-                  <img src={DefImage} alt="" />
+                <div className="bg-gray-200 w-full h-40 rounded-md flex justify-center items-center">
+                  <img src={p.image_link} alt="" />
                 </div>
                 <p className="font-bold h-12 flex items-center">
                   {p.product_name}

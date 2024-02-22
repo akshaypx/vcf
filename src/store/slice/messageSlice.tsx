@@ -13,7 +13,7 @@ export const fetchMessage = createAsyncThunk(
   async (userRequest: UserRequest) => {
     try {
       if (userRequest) {
-        console.log(userRequest);
+        // console.log(userRequest);
         const response = await fetch(`${API_URL}/send-user-request`, {
           method: "POST",
           headers: {
@@ -22,7 +22,7 @@ export const fetchMessage = createAsyncThunk(
           body: JSON.stringify(userRequest),
         });
         const data: ResponseData = await response.json();
-        console.log(data);
+        // console.log(data);
         return data;
       }
     } catch (err) {
@@ -81,7 +81,7 @@ const messageSlice = createSlice({
         state.loading = "failed";
       })
       .addCase(fetchMessage.fulfilled, (state, action) => {
-        console.log(action);
+        // console.log(action);
         state.error = null;
         state.loading = "succeeded";
         state.responseData = action.payload as ResponseData;
