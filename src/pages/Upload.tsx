@@ -9,166 +9,166 @@ import chatIcon from "../assets/chat.svg";
 import cartIcon from "../assets/cart.svg";
 import nagarroLogo from "../assets/Nagarro_Logo.svg";
 
-const mockData = [
-  {
-    product_name: "Texture Conceptor Stonex C307 Texture Paint",
-    quantity: 5,
-    product_size: [],
-    search_prod_list: [
-      {
-        product_code: "QAZW017",
-        product_name: "Texture Concepts Stonex C 304 Texture Paint",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/t/e/texc304.png",
-        price: "48940",
-        varient: null,
-      },
-      {
-        product_code: "QAZW013",
-        product_name: "Texture Concepts Stonex C 308 Texture Paint",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/t/e/texc308.png",
-        price: "48940",
-        varient: null,
-      },
-      {
-        product_code: "QAZW016",
-        product_name: "Texture Concepts Stonex C 305 Texture Paint",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/t/e/texc305.png",
-        price: "48940",
-        varient: null,
-      },
-      {
-        product_code: "QAZW018",
-        product_name: "Texture Concepts Stonex C 303 Texture Paint",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/t/e/texc303.png",
-        price: "48940",
-        varient: null,
-      },
-      {
-        product_code: "QAZW020",
-        product_name: "Texture Concepts Stonex C 301 Texture Paint",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/t/e/texc301.png",
-        price: "48940",
-        varient: null,
-      },
-    ],
-  },
-  {
-    product_name: "Grohe Essence Black",
-    quantity: 8,
-    product_size: [],
-    search_prod_list: [
-      {
-        product_code: "QAZW005",
-        product_name: "Grohe Essence Black",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/4/0/40689a01_1.jpg",
-        price: "76690",
-        varient: null,
-      },
-      {
-        product_code: "QAZW006",
-        product_name: "Grohe Essence 35mm Black",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/3/3/33624a01_1.jpg",
-        price: "48490",
-        varient: null,
-      },
-      {
-        product_code: "QAZW007",
-        product_name: "Grohe Essence 28mm Black",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/2/3/23462a01_1.jpg",
-        price: "24560",
-        varient: null,
-      },
-    ],
-  },
-  {
-    product_name: "Vector Silk Water Tank",
-    quantity: 2,
-    product_size: [],
-    search_prod_list: [
-      {
-        product_code: "QAZW022",
-        product_name: "Vectus Silk Water Tank",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/v/e/vecslk.png",
-        price: "48940",
-        varient: null,
-      },
-    ],
-  },
-  {
-    product_name: "Birla Pivot Ceramic Wall Tiles",
-    quantity: 6361,
-    product_size: [
-      {
-        value: 300,
-        unit: "mm",
-        sign: "x",
-      },
-      {
-        value: 450,
-        unit: "mm",
-        sign: "",
-      },
-    ],
-    search_prod_list: [
-      {
-        product_code: "QAZW055",
-        product_name:
-          "Birla Pivot Ceramic Wall Tiles - 300 mm x 450 mm - 6361 D P2",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/placeholder/default/Product_Pivot_Default.jpeg",
-        price: "500",
-        varient: null,
-      },
-      {
-        product_code: "QAZW062",
-        product_name: "Birla Pivot Ceramic Floor Tiles",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/b/p/bpt-bristoblue_1.png",
-        price: "900",
-        varient: null,
-      },
-      {
-        product_code: "QAZW056",
-        product_name:
-          "Birla Pivot Ceramic Floor Tiles - 300 mm x 300 mm - 6361 P6",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/placeholder/default/Product_Pivot_Default.jpeg",
-        price: "500",
-        varient: null,
-      },
-      {
-        product_code: "QAZW010",
-        product_name: "Birla White Precoat Cement Based Putty - 30 Kg",
-        summary: "",
-        image_link:
-          "https://www.birlapivot.com/media/catalog/product/b/i/birlawhitelogo.png",
-        price: "48940",
-        varient: null,
-      },
-    ],
-  },
-];
+// const mockData = [
+//   {
+//     product_name: "Texture Conceptor Stonex C307 Texture Paint",
+//     quantity: 5,
+//     product_size: [],
+//     search_prod_list: [
+//       {
+//         product_code: "QAZW017",
+//         product_name: "Texture Concepts Stonex C 304 Texture Paint",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/t/e/texc304.png",
+//         price: "48940",
+//         varient: null,
+//       },
+//       {
+//         product_code: "QAZW013",
+//         product_name: "Texture Concepts Stonex C 308 Texture Paint",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/t/e/texc308.png",
+//         price: "48940",
+//         varient: null,
+//       },
+//       {
+//         product_code: "QAZW016",
+//         product_name: "Texture Concepts Stonex C 305 Texture Paint",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/t/e/texc305.png",
+//         price: "48940",
+//         varient: null,
+//       },
+//       {
+//         product_code: "QAZW018",
+//         product_name: "Texture Concepts Stonex C 303 Texture Paint",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/t/e/texc303.png",
+//         price: "48940",
+//         varient: null,
+//       },
+//       {
+//         product_code: "QAZW020",
+//         product_name: "Texture Concepts Stonex C 301 Texture Paint",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/t/e/texc301.png",
+//         price: "48940",
+//         varient: null,
+//       },
+//     ],
+//   },
+//   {
+//     product_name: "Grohe Essence Black",
+//     quantity: 8,
+//     product_size: [],
+//     search_prod_list: [
+//       {
+//         product_code: "QAZW005",
+//         product_name: "Grohe Essence Black",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/4/0/40689a01_1.jpg",
+//         price: "76690",
+//         varient: null,
+//       },
+//       {
+//         product_code: "QAZW006",
+//         product_name: "Grohe Essence 35mm Black",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/3/3/33624a01_1.jpg",
+//         price: "48490",
+//         varient: null,
+//       },
+//       {
+//         product_code: "QAZW007",
+//         product_name: "Grohe Essence 28mm Black",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/2/3/23462a01_1.jpg",
+//         price: "24560",
+//         varient: null,
+//       },
+//     ],
+//   },
+//   {
+//     product_name: "Vector Silk Water Tank",
+//     quantity: 2,
+//     product_size: [],
+//     search_prod_list: [
+//       {
+//         product_code: "QAZW022",
+//         product_name: "Vectus Silk Water Tank",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/v/e/vecslk.png",
+//         price: "48940",
+//         varient: null,
+//       },
+//     ],
+//   },
+//   {
+//     product_name: "Birla Pivot Ceramic Wall Tiles",
+//     quantity: 6361,
+//     product_size: [
+//       {
+//         value: 300,
+//         unit: "mm",
+//         sign: "x",
+//       },
+//       {
+//         value: 450,
+//         unit: "mm",
+//         sign: "",
+//       },
+//     ],
+//     search_prod_list: [
+//       {
+//         product_code: "QAZW055",
+//         product_name:
+//           "Birla Pivot Ceramic Wall Tiles - 300 mm x 450 mm - 6361 D P2",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/placeholder/default/Product_Pivot_Default.jpeg",
+//         price: "500",
+//         varient: null,
+//       },
+//       {
+//         product_code: "QAZW062",
+//         product_name: "Birla Pivot Ceramic Floor Tiles",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/b/p/bpt-bristoblue_1.png",
+//         price: "900",
+//         varient: null,
+//       },
+//       {
+//         product_code: "QAZW056",
+//         product_name:
+//           "Birla Pivot Ceramic Floor Tiles - 300 mm x 300 mm - 6361 P6",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/placeholder/default/Product_Pivot_Default.jpeg",
+//         price: "500",
+//         varient: null,
+//       },
+//       {
+//         product_code: "QAZW010",
+//         product_name: "Birla White Precoat Cement Based Putty - 30 Kg",
+//         summary: "",
+//         image_link:
+//           "https://www.birlapivot.com/media/catalog/product/b/i/birlawhitelogo.png",
+//         price: "48940",
+//         varient: null,
+//       },
+//     ],
+//   },
+// ];
 
 function Upload() {
   const [isloading, setIsLoading] = useState<boolean>(false);
