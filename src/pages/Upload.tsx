@@ -172,7 +172,7 @@ const mockData = [
 
 function Upload() {
   const [isloading, setIsLoading] = useState<boolean>(false);
-  const [data, setData] = useState<voiceFileResponse[]>(mockData);
+  const [data, setData] = useState<voiceFileResponse[]>([]);
   //dropzone
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
@@ -320,43 +320,104 @@ function Upload() {
           </table>
         </div>
       )} */}
-      <div className="w-full flex justify-center items-center">
+      <div className="w-full flex justify-center items-center my-8 gap-4">
         {data.length > 0 && (
-          <div className="justify-center">
+          <div className="w-[900px] flex flex-wrap justify-start gap-4">
             {data.map((p, idx) => {
               if (p.search_prod_list) {
-                if (p.search_prod_list.length > 1) {
+                if (p.search_prod_list.length > 0) {
                   return (
-                    <div className="block bg-white p-2" key={idx}>
+                    <div
+                      className="block bg-white p-4 my-2 max-w-fit"
+                      key={idx}
+                    >
                       <p className="border border-b-2 border-t-0 border-l-0 border-r-0 p-2 pl-0 font-bold">
                         {p.product_name}
                       </p>
-                      <label key={idx}>
+                      <div className="flex gap-2 pt-2">
                         {p.search_prod_list &&
                           p.search_prod_list.map((sp, _) => (
-                            <div key={_}>
-                              <input type="radio" name={idx.toString()} />
-                              <div key={_}>{sp.product_name}</div>
-                              <div className="w-20 h-20 overflow-hidden">
-                                <img
-                                  className="object-cover"
-                                  src={sp.image_link}
-                                  alt=""
-                                />
+                            <label key={_}>
+                              <div
+                                key={_}
+                                className="border-2 w-40 p-4  flex flex-col items-center gap-1"
+                              >
+                                <div className="w-32 h-32 relative overflow-hidden object-cover">
+                                  <input
+                                    type="radio"
+                                    name={idx.toString()}
+                                    className="absolute right-0"
+                                  />
+                                  <img
+                                    className="object-cover w-full h-full"
+                                    src={sp.image_link}
+                                    alt=""
+                                  />
+                                </div>
+                                <div key={_} className="text-xs font-bold">
+                                  {sp.product_name}
+                                </div>
+                                <div
+                                  key={_}
+                                  className="font-bold text-left w-full"
+                                >
+                                  {sp.price}
+                                </div>
                               </div>
-                            </div>
+                            </label>
                           ))}
-                      </label>
+                      </div>
                     </div>
                   );
                 }
-                return (
-                  <label className="">
-                    <p key={idx.toString()}>{p.product_name}</p>
-                  </label>
-                );
+                // if (p.search_prod_list.length === 1)
+                //   return (
+                //     <label className="">
+                //       <div className=" bg-white p-4 my-2 max-w-fit" key={idx}>
+                //         <p className="border border-b-2 border-t-0 border-l-0 border-r-0 p-2 pl-0 font-bold">
+                //           {p.product_name}
+                //         </p>
+                //         <div className="flex gap-2 pt-2">
+                //           {p.search_prod_list &&
+                //             p.search_prod_list.map((sp, _) => (
+                //               <div
+                //                 key={_}
+                //                 className="border-2 w-40 p-4  flex flex-col items-center gap-1"
+                //               >
+                //                 <div className="w-32 h-32 relative overflow-hidden object-cover">
+                //                   <input
+                //                     type="radio"
+                //                     name={idx.toString()}
+                //                     className="absolute right-0"
+                //                   />
+                //                   <img
+                //                     className="object-cover w-full h-full"
+                //                     src={sp.image_link}
+                //                     alt=""
+                //                   />
+                //                 </div>
+                //                 <div key={_} className="text-xs font-bold">
+                //                   {sp.product_name}
+                //                 </div>
+                //                 <div
+                //                   key={_}
+                //                   className="font-bold text-left w-full"
+                //                 >
+                //                   {sp.price}
+                //                 </div>
+                //               </div>
+                //             ))}
+                //         </div>
+                //       </div>
+                //     </label>
+                //   );
               }
             })}
+            <div className="w-full text-right">
+              <button className="px-8 py-2 rounded-full bg-[#46d7ac] font-bold">
+                Add to Cart
+              </button>
+            </div>
           </div>
         )}
       </div>
