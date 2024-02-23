@@ -55,7 +55,7 @@ function App() {
 
     const bodyContent = `access_token=${str}`;
     if (str === null) {
-      const res = await fetch(`https://3.7.66.195/api/get-access-token`);
+      const res = await fetch(`https://3.110.223.20/api/get-access-token`);
       const d = await res.json();
       return d.access_token;
     }
@@ -69,7 +69,7 @@ function App() {
     );
 
     if (response.status === 400) {
-      const res = await fetch(`https://3.7.66.195/api/get-access-token`);
+      const res = await fetch(`https://3.110.223.20/api/get-access-token`);
       const d = await res.json();
       return d.access_token;
     }
@@ -131,7 +131,7 @@ function App() {
   const sentenceCorrection = async (str: string) => {
     try {
       const response = await fetch(
-        `https://3.7.66.195/sentence-correction?request_sentence=${str}`
+        `https://3.110.223.20/sentence-correction?request_sentence=${str}`
       );
       const data = await response.json();
       return data.response_sentence;

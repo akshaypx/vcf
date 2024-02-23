@@ -1,234 +1,364 @@
-import { ToastContainer } from "react-toastify";
-// import DefImage from "../assets/images/default.jpg";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import UploadForm from "../components/UploadForm";
+import { useState } from "react";
+import { voiceFileResponse } from "../interfaces/voiceFileInterface";
+import { useDropzone } from "react-dropzone";
+import { UploadCloud } from "lucide-react";
+import languageIcon from "../assets/language.svg";
+import chatIcon from "../assets/chat.svg";
+import cartIcon from "../assets/cart.svg";
+import nagarroLogo from "../assets/Nagarro_Logo.svg";
+
+const mockData = [
+  {
+    product_name: "Texture Conceptor Stonex C307 Texture Paint",
+    quantity: 5,
+    product_size: [],
+    search_prod_list: [
+      {
+        product_code: "QAZW017",
+        product_name: "Texture Concepts Stonex C 304 Texture Paint",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/t/e/texc304.png",
+        price: "48940",
+        varient: null,
+      },
+      {
+        product_code: "QAZW013",
+        product_name: "Texture Concepts Stonex C 308 Texture Paint",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/t/e/texc308.png",
+        price: "48940",
+        varient: null,
+      },
+      {
+        product_code: "QAZW016",
+        product_name: "Texture Concepts Stonex C 305 Texture Paint",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/t/e/texc305.png",
+        price: "48940",
+        varient: null,
+      },
+      {
+        product_code: "QAZW018",
+        product_name: "Texture Concepts Stonex C 303 Texture Paint",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/t/e/texc303.png",
+        price: "48940",
+        varient: null,
+      },
+      {
+        product_code: "QAZW020",
+        product_name: "Texture Concepts Stonex C 301 Texture Paint",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/t/e/texc301.png",
+        price: "48940",
+        varient: null,
+      },
+    ],
+  },
+  {
+    product_name: "Grohe Essence Black",
+    quantity: 8,
+    product_size: [],
+    search_prod_list: [
+      {
+        product_code: "QAZW005",
+        product_name: "Grohe Essence Black",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/4/0/40689a01_1.jpg",
+        price: "76690",
+        varient: null,
+      },
+      {
+        product_code: "QAZW006",
+        product_name: "Grohe Essence 35mm Black",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/3/3/33624a01_1.jpg",
+        price: "48490",
+        varient: null,
+      },
+      {
+        product_code: "QAZW007",
+        product_name: "Grohe Essence 28mm Black",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/2/3/23462a01_1.jpg",
+        price: "24560",
+        varient: null,
+      },
+    ],
+  },
+  {
+    product_name: "Vector Silk Water Tank",
+    quantity: 2,
+    product_size: [],
+    search_prod_list: [
+      {
+        product_code: "QAZW022",
+        product_name: "Vectus Silk Water Tank",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/v/e/vecslk.png",
+        price: "48940",
+        varient: null,
+      },
+    ],
+  },
+  {
+    product_name: "Birla Pivot Ceramic Wall Tiles",
+    quantity: 6361,
+    product_size: [
+      {
+        value: 300,
+        unit: "mm",
+        sign: "x",
+      },
+      {
+        value: 450,
+        unit: "mm",
+        sign: "",
+      },
+    ],
+    search_prod_list: [
+      {
+        product_code: "QAZW055",
+        product_name:
+          "Birla Pivot Ceramic Wall Tiles - 300 mm x 450 mm - 6361 D P2",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/placeholder/default/Product_Pivot_Default.jpeg",
+        price: "500",
+        varient: null,
+      },
+      {
+        product_code: "QAZW062",
+        product_name: "Birla Pivot Ceramic Floor Tiles",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/b/p/bpt-bristoblue_1.png",
+        price: "900",
+        varient: null,
+      },
+      {
+        product_code: "QAZW056",
+        product_name:
+          "Birla Pivot Ceramic Floor Tiles - 300 mm x 300 mm - 6361 P6",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/placeholder/default/Product_Pivot_Default.jpeg",
+        price: "500",
+        varient: null,
+      },
+      {
+        product_code: "QAZW010",
+        product_name: "Birla White Precoat Cement Based Putty - 30 Kg",
+        summary: "",
+        image_link:
+          "https://www.birlapivot.com/media/catalog/product/b/i/birlawhitelogo.png",
+        price: "48940",
+        varient: null,
+      },
+    ],
+  },
+];
 
 function Upload() {
-  // const [isError, setIsError] = useState<boolean>(false);
-  // const [searchTerm, setSearchTerm] = useState("");
-  // const [showVoice, setShowVoice] = useState(false);
-  // const dispatch = useAppDispatch();
-  // const responseData = useAppSelector((state) => state.message.responseData);
-  // const [speechText, setSpeechText] = useState(
-  //   "Good Morning, How can I help you?"
-  // );
-  // const [isListening, setIsListening] = useState<boolean>(false);
-  // // const [showToast, setShowToast] = useState("");
-  // //speech
-  // const [isSpeaking, setIsSpeaking] = useState(false);
-  // //voice from google
-  // const [audio, setAudio] = useState<string | null>(null);
+  const [isloading, setIsLoading] = useState<boolean>(false);
+  const [data, setData] = useState<voiceFileResponse[]>(mockData);
+  //dropzone
+  const { acceptedFiles, getRootProps, getInputProps } = useDropzone();
 
-  // function getWordCount(str: string) {
-  //   var count = 0;
-  //   for (let i = 0; i < str.length; i++) {
-  //     if (str.charAt(i) === " " || i + 1 === str.length) count++;
-  //   }
-  //   return count;
-  // }
-  // function getFrequency(str: string, char: string) {
-  //   var freq = 0;
-  //   for (let i = 0; i < str.length; i++) {
-  //     if (str.charAt(i) === char) freq++;
-  //   }
-  //   return freq;
-  // }
+  const files = acceptedFiles.map((file: any) => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes
+    </li>
+  ));
 
-  // const fetchAudio = async (str: string) => {
-  //   const url = "https://texttospeech.googleapis.com/v1/text:synthesize";
-  //   const options = {
-  //     method: "POST",
-  //     headers: {
-  //       Accept: "*/*",
-  //       "User-Agent": "Thunder Client (https://www.thunderclient.com)",
-  //       "x-goog-user-project": "test1-ywpq",
-  //       "Content-Type": "application/json",
-  //       Authorization:
-  //         "Bearer ",
-  //     },
-  //     body: JSON.stringify({
-  //       input: { text: str },
-  //       voice: {
-  //         languageCode: "en-IN",
-  //         name: "en-IN-Neural2-B",
-  //         ssmlGender: "MALE",
-  //       },
-  //       audioConfig: { audioEncoding: "MP3" },
-  //     }),
-  //   };
-  //   try {
-  //     const response = await fetch(url, options);
-  //     if (response.status === 200) {
-  //       const data = await response.json();
-  //       setShowVoice(true);
-  //       setIsSpeaking(true);
-  //       setAudio(data.audioContent);
-  //       setTimeout(() => {
-  //         setIsSpeaking(false);
-  //         setIsListening(true);
-  //       }, getWordCount(str) * 350 + getFrequency(str, ".") * 500 + getFrequency(str, ",") * 500 + getFrequency(str, ";") * 500);
-  //       return data;
-  //     } else {
-  //       setIsSpeaking(false);
-  //       setIsListening(false);
-  //       setIsError(true);
-  //       setShowVoice(false);
-  //       throw new Error();
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
+  const fetchData = async (file: any) => {
+    const url = "https://3.110.223.20/send-voice-file";
+    const bodyContent = new FormData();
+    bodyContent.append("uploaded_file", file); // Use 'uploaded_file' as the key
+    setIsLoading(true);
+    const response = await fetch(url, {
+      method: "POST",
+      body: bodyContent,
+    });
+    const d = await response.json();
+    setIsLoading(false);
+    setData(d);
+  };
 
-  //     return error;
-  //   }
-  // };
+  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
 
-  // console.log("isSpeaking = ", isSpeaking, "isListening = ", isListening);
-
-  // const sentenceCorrection = async (str: string) => {
-  //   try {
-  //     const response = await fetch(
-  //       `http://localhost:8000/sentence-correction?request_sentence=${str}`
-  //     );
-  //     const data = await response.json();
-  //     return data.response_sentence;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // // useEffect(() => {
-  // //   if (annyang) {
-  // //     annyang.addCallback("result", (phrases: string[]) => {
-  // //       const firstPhrase = phrases[0];
-  // //       if (
-  // //         isListening === false &&
-  // //         showVoice === false &&
-  // //         isSpeaking === false
-  // //       ) {
-  // //         //not listening and not showing voice rec
-  // //         if (
-  // //           firstPhrase.toLowerCase().includes("hello vk") ||
-  // //           firstPhrase.toLowerCase().includes("hello weeke") ||
-  // //           firstPhrase.toLowerCase().includes("hello pk") ||
-  // //           firstPhrase.toLowerCase().includes("hello vijay") ||
-  // //           firstPhrase.toLowerCase().includes("hello vicki.")
-  // //         ) {
-  // //           //is
-  // //           setShowVoice(true);
-  // //         } else {
-  // //           console.log(firstPhrase);
-  // //           toast("Say 'Hello VK' to begin!");
-  // //         }
-  // //       }
-  // //       if (isSpeaking === false && showVoice && isListening) {
-  // //         //SENTENCE CORRECTION
-  // //         if (getWordCount(firstPhrase) > 2) {
-  // //           sentenceCorrection(firstPhrase).then((sentence) =>
-  // //             handleWordDetection(sentence)
-  // //           );
-  // //         } else handleWordDetection(firstPhrase);
-  // //       } else console.log("Speaking or No hot word");
-  // //     });
-
-  // //     annyang.start();
-
-  // //     return () => {
-  // //       annyang.abort();
-  // //       annyang.removeCallback("result");
-  // //     };
-  // //   }
-  // // });
-
-  // const handleWordDetection = (text: string) => {
-  //   setSearchTerm(() => {
-  //     sendMessage(text);
-  //     return text;
-  //   });
-  // };
-
-  // const sendMessage = (text: string) => {
-  //   const query = text;
-  //   setSearchTerm(text);
-  //   const body = {
-  //     user_request: query,
-  //     ask_for: responseData?.ask_for,
-  //     current_intent: responseData?.current_intent,
-  //     cart_id: responseData?.cart_id,
-  //     address_id: responseData?.address_id,
-  //     order_id: responseData?.order_id,
-  //     prv_response: responseData?.prv_response,
-  //     show_page: responseData?.show_page,
-  //     quantity: responseData?.quantity,
-  //     products: responseData?.products?.map((p) => {
-  //       const price = p.price.toString();
-  //       return { ...p, price };
-  //     }),
-  //     selectedProduct: responseData?.selectedProduct
-  //       ? {
-  //           ...responseData.selectedProduct,
-  //           price: responseData?.selectedProduct?.price.toString(),
-  //         }
-  //       : null,
-  //   };
-  //   dispatch(addToMessages(body));
-  //   dispatch(fetchMessage(body));
-  // };
-
-  // const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-  //   sendMessage(searchTerm);
-  // };
-
-  // //Auto click a hidden button to bypass Auto Play restriction
-  // useEffect(() => {
-  //   const hiddenButton = document.getElementById("hiddenButton");
-  //   if (hiddenButton) {
-  //     hiddenButton.click();
-  //     console.log("Welcome to our website");
-  //   }
-  // }, []);
-
-  // useEffect(() => {
-  //   if (showVoice) {
-  //     if (responseData === null) {
-  //       fetchAudio(speechText);
-  //     } else {
-  //       fetchAudio(responseData.responce_data);
-  //     }
-  //   }
-  // }, [showVoice, responseData]);
-
-  //SENTENCE CORRECTION
-
+    if (acceptedFiles.length > 0) {
+      fetchData(acceptedFiles[0]);
+    } else {
+      console.log("No File Selected");
+      toast("Please select file");
+    }
+  }
   return (
-    <div className="w-full h-screen bg-primary-background flex flex-col">
+    <div className="w-full min-h-screen bg-primary-background flex flex-col">
       <ToastContainer />
       <button id="hiddenButton" style={{ display: "none" }}></button>
-
-      <div className="w-full h-[88vh] flex flex-col justify-center items-center">
-        <div className="w-full h-full flex justify-center items-start gap-6 mt-8">
-          {<UploadForm />}
+      <div className="w-full h-[12vh] flex justify-between items-center px-10">
+        <div className="flex-1">
+          <img src={nagarroLogo} height={25} width={25} alt="" />
         </div>
-        {/* {showVoice && audio && (
-          <div className="bg-black w-full h-1/5 absolute bottom-0 opacity-80 flex flex-col gap-4 justify-center items-center overflow-hidden">
-            <div className="h-[180px] flex items-center justify-center">
-              <Siriwave theme="ios9" autostart={isSpeaking} />
-              <div className="absolute m-auto top-5 ">
-                <img src={micImage} height={50} width={50} alt="" />
-              </div>
-              <div className="absolute bottom-2 w-[70%] text-center text-white">
-                {responseData?.responce_data ? (
-                  <p className="text-white">{responseData?.responce_data}</p>
-                ) : (
-                  <p className="text-white">
-                    {searchTerm.length > 0 ? searchTerm : speechText}
-                  </p>
+        <div className="w-[60%] pt-8 flex justify-center items-start text-white">
+          <div className="flex flex-col justify-center items-start w-full gap-2">
+            <div className="w-full h-[2px] bg-[#46d7ac] ml-[10%]">
+              <div className="w-3 h-3 bg-[#46d7ac] rounded-full relative top-[-5px] left-[-2px] flex justify-center items-center">
+                {data.length === 0 && (
+                  <div className="w-2 h-2 bg-white rounded-full "></div>
                 )}
-                <audio autoPlay={true} src={"data:audio/ogg;base64," + audio} />
               </div>
             </div>
+            <div>Cart Preparations</div>
           </div>
-        )} */}
+          <div className="flex flex-col justify-center items-end w-full gap-2">
+            <div className="w-full h-[2px] bg-[#46d7ac] flex justify-end mr-[10%]">
+              <div className="w-3 h-3 bg-[#46d7ac] rounded-full relative top-[-5px] right-[-2px] flex justify-center items-center">
+                {data.length > 0 && (
+                  <div className="w-2 h-2 bg-white rounded-full "></div>
+                )}
+              </div>
+            </div>
+            <div>Checkout and confirmation</div>
+          </div>
+        </div>
+        <div className="flex-1 flex gap-4 justify-end">
+          <img src={languageIcon} height={25} width={25} alt="" />
+          <img src={chatIcon} height={25} width={25} alt="" />
+          <img src={cartIcon} height={25} width={25} alt="" />
+        </div>
+      </div>
+      {data.length === 0 && (
+        <div className="w-full h-[88vh] flex flex-col justify-center items-center">
+          <div className="w-full h-full flex justify-center items-start gap-6 mt-8">
+            <div className="w-[80%] flex flex-col gap-4 justify-center">
+              <form
+                className="text-white flex flex-col gap-4 justify-center items-center"
+                onSubmit={(e) => handleSubmit(e)}
+              >
+                <h2 className="text-2xl font-bold">Upload Your File Here</h2>
+                <section className="container w-1/2 bg-gray-200 text-black rounded-md ">
+                  <div
+                    {...getRootProps({ className: "dropzone" })}
+                    className="m-2 border-[2px] border-black border-dashed border-opacity-20 p-4 cursor-pointer"
+                  >
+                    <input {...getInputProps()} />
+                    <p className="text-gray-400">
+                      Drag 'n' drop audio file here, or click to select files
+                    </p>
+                  </div>
+                  {files.length > 0 && (
+                    <aside className="px-4">
+                      <h4>Files :</h4>
+                      <ul>{files}</ul>
+                    </aside>
+                  )}
+                </section>
+                {/* <input type="file" onChange={(e) => handleChange(e)} /> */}
+                {isloading ? (
+                  <button
+                    className="w-48 bg-[#297b63]  text-black rounded-full p-2 hover:bg-[#3ab38f] transition flex justify-center gap-2 items-center"
+                    disabled
+                  >
+                    Loading
+                  </button>
+                ) : (
+                  <button
+                    className="w-48 bg-[#46d7ac] text-black rounded-full p-2 hover:bg-[#3ab38f] transition flex justify-center gap-2 items-center"
+                    type="submit"
+                  >
+                    <UploadCloud size={20} />
+                    Upload
+                  </button>
+                )}
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+      {/* Table  */}
+      {/* {data.length > 0 && (
+        <div className="w-full p-4">
+          <table className="w-full bg-white p-2 rounded-lg">
+            <thead className="text-left p-2 font-bold text-blue-950">
+              <tr>
+                <th className="p-2 pl-4">Name</th>
+                <th className="p-2">Quantity</th>
+                <th className="p-2">Size</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((d, _) => (
+                <tr key={_} className={_ % 2 == 0 ? "bg-gray-200" : ""}>
+                  <td className="p-2 pl-4">{d.product_name}</td>
+                  <td className="p-2">{d.quantity}</td>
+                  <td className="p-2 flex">
+                    {d.product_size?.map((s, _) => (
+                      <p key={_}>
+                        {s?.value}
+                        {s?.unit} {s?.sign}
+                      </p>
+                    ))}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )} */}
+      <div className="w-full flex justify-center items-center">
+        {data.length > 0 && (
+          <div className="justify-center">
+            {data.map((p, idx) => {
+              if (p.search_prod_list) {
+                if (p.search_prod_list.length > 1) {
+                  return (
+                    <div className="block bg-white p-2" key={idx}>
+                      <p className="border border-b-2 border-t-0 border-l-0 border-r-0 p-2 pl-0 font-bold">
+                        {p.product_name}
+                      </p>
+                      <label key={idx}>
+                        {p.search_prod_list &&
+                          p.search_prod_list.map((sp, _) => (
+                            <div key={_}>
+                              <input type="radio" name={idx.toString()} />
+                              <div key={_}>{sp.product_name}</div>
+                              <div className="w-20 h-20 overflow-hidden">
+                                <img
+                                  className="object-cover"
+                                  src={sp.image_link}
+                                  alt=""
+                                />
+                              </div>
+                            </div>
+                          ))}
+                      </label>
+                    </div>
+                  );
+                }
+                return (
+                  <label className="">
+                    <p key={idx.toString()}>{p.product_name}</p>
+                  </label>
+                );
+              }
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
