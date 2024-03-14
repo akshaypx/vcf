@@ -4,9 +4,10 @@ import {
   ResponseData,
   UserRequest,
 } from "../../interfaces/messageInterface";
+import { API_BASE_URL } from "../../constants";
 
 // const API_URL = "https://13.234.76.77";
-const API_URL = "https://3.110.223.20";
+// const API_URL = "https://3.110.223.20";
 
 export const fetchMessage = createAsyncThunk(
   "message/fetchMessage",
@@ -14,7 +15,7 @@ export const fetchMessage = createAsyncThunk(
     try {
       if (userRequest) {
         // console.log(userRequest);
-        const response = await fetch(`${API_URL}/send-user-request`, {
+        const response = await fetch(`${API_BASE_URL}/send-user-request`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

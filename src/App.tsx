@@ -15,6 +15,7 @@ import tickImage from "./assets/images/tick.png";
 import annyang from "annyang";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { API_BASE_URL } from "./constants";
 
 function App() {
   // const [isError, setIsError] = useState<boolean>(false);
@@ -22,7 +23,7 @@ function App() {
   const [showVoice, setShowVoice] = useState(false);
   const dispatch = useAppDispatch();
   const responseData = useAppSelector((state) => state.message.responseData);
-  const speechText = "Good Morning, How can I help you?";
+  const speechText = "Good Evening, How can I help you?";
   const [isListening, setIsListening] = useState<boolean>(false);
   // const [showToast, setShowToast] = useState("");
   //speech
@@ -55,7 +56,7 @@ function App() {
 
     const bodyContent = `access_token=${str}`;
     if (str === null) {
-      const res = await fetch(`https://3.110.223.20/api/get-access-token`);
+      const res = await fetch(`${API_BASE_URL}/api/get-access-token`);
       const d = await res.json();
       return d.access_token;
     }
@@ -69,7 +70,7 @@ function App() {
     );
 
     if (response.status === 400) {
-      const res = await fetch(`https://3.110.223.20/api/get-access-token`);
+      const res = await fetch(`${API_BASE_URL}/api/get-access-token`);
       const d = await res.json();
       return d.access_token;
     }
@@ -131,7 +132,7 @@ function App() {
   const sentenceCorrection = async (str: string) => {
     try {
       const response = await fetch(
-        `https://3.110.223.20/sentence-correction?request_sentence=${str}`
+        `${API_BASE_URL}/sentence-correction?request_sentence=${str}`
       );
       const data = await response.json();
       return data.response_sentence;
@@ -325,7 +326,7 @@ function App() {
           {responseData &&
             responseData.cart_id === null &&
             responseData.selectedProduct && (
-              <div className="bg-white h-[350px] w-[600px] flex rounded-md justify-center items-start p-2 gap-4">
+              <div className="bg-white h-fit w-[600px] flex rounded-md justify-center items-start p-2 gap-4">
                 <div className="bg-gray-200 w-1/4 h-full rounded-md object-contain flex justify-center items-center">
                   <img src={responseData.selectedProduct.image_link} alt="" />
                 </div>
@@ -371,7 +372,19 @@ function App() {
                   <div>
                     <p className="font-bold py-1">Quantity</p>
                     <div className="border-2 px-4 py-1 rounded-full">
-                      0 Peice
+                      0 piece
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-bold py-1">Price</p>
+                    <div className="border-2 px-4 py-1 rounded-full">
+                      {responseData.selectedProduct.price}
+                    </div>
+                  </div>
+                  <div>
+                    <p className="font-bold py-1">Pack Size</p>
+                    <div className="border-2 px-4 py-1 rounded-full">
+                      {responseData.selectedProduct.pack_size}
                     </div>
                   </div>
                 </div>
@@ -383,17 +396,19 @@ function App() {
             responseData.products?.map((p, _) => (
               <div
                 key={_}
-                className="bg-white h-[300px] w-[200px] p-4 flex flex-col justify-between rounded-md overflow-hidden"
+                className="bg-white h-[330px] w-[200px] p-4 flex flex-col justify-between rounded-md overflow-hidden"
               >
-                <div className="bg-gray-200 w-full h-40 rounded-md flex justify-center items-center">
+                <div className="bg-gray-200 w-30 h-40 rounded-md flex justify-center items-center overflow-hidden object-center">
                   <img src={p.image_link} alt="" />
                 </div>
                 <p className="font-bold h-12 flex items-center">
-                  {p.product_name}
+                  {p.product_name.length > 35
+                    ? p.product_name.substring(0, 35) + "..."
+                    : p.product_name}
                 </p>
-                <p className="text-sm font-semibold ">
-                  {p.summary.length > 60
-                    ? p.summary.substring(0, 60) + "..."
+                <p className="text-sm">
+                  {p.summary.length > 82
+                    ? p.summary.substring(0, 82) + "..."
                     : p.summary}
                 </p>
               </div>

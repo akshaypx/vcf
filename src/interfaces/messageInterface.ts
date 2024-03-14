@@ -33,6 +33,9 @@ export interface ResponseProductsEntity {
   price: number;
   varient?: VarientEntity[] | null;
   image_link: string;
+  pack_size: string;
+  pack_type: string;
+  is_conversion: boolean;
 }
 export interface ProductsEntity {
   product_code: string;
@@ -41,6 +44,9 @@ export interface ProductsEntity {
   price: string;
   varient?: VarientEntity[] | null;
   image_link: string;
+  pack_size: string;
+  pack_type: string;
+  is_conversion: boolean;
 }
 export interface Message {
   text: string;
